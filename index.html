@@ -185,8 +185,8 @@ body{font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;back
 </div>
 <div style="font-size:13px;color:#666;line-height:1.7;margin-bottom:14px;">每次训练结束后务必拉伸，预防肌肉酸痛，塑造修长线条。建议每个动作保持30秒。</div>
 <div style="display:flex;gap:8px;">
-<a href="https://v.douyin.com/LuariZHUrjg/" target="_blank" style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,.7);text-decoration:none;text-align:center;font-size:13px;font-weight:500;color:#4A7A5A;display:flex;align-items:center;justify-content:center;gap:6px;">🎥 跳转抖音</a>
-<a href="https://v.douyin.com/LuariZHUrjg/" target="_blank" style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,.7);text-decoration:none;text-align:center;font-size:13px;font-weight:500;color:#666;display:flex;align-items:center;justify-content:center;gap:6px;">🪟 新窗口打开</a>
+<a href="javascript:void(0)" onclick="openVideo('https://v.douyin.com/LuariZHUrjg/','dy')" style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,.7);text-decoration:none;text-align:center;font-size:13px;font-weight:500;color:#4A7A5A;display:flex;align-items:center;justify-content:center;gap:6px;">🎥 跳转抖音</a>
+<a href="javascript:void(0)" onclick="openVideo('https://v.douyin.com/LuariZHUrjg/','newtab')" style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,.7);text-decoration:none;text-align:center;font-size:13px;font-weight:500;color:#666;display:flex;align-items:center;justify-content:center;gap:6px;">🪟 新窗口打开</a>
 </div>
 </div>
 <div id="days-container"></div>
@@ -350,6 +350,16 @@ const TRAINING_DATA = {
 
 let state = { checks: {}, sets: {} };
 
+function openVideo(url, type) {
+  if (!url) return;
+  if (type === 'dy') {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  } else {
+    window.open(url, '_blank', 'width=800,height=600,noopener,noreferrer');
+  }
+  return false;
+}
+
 function loadState() {
   try {
     const s = localStorage.getItem('fitness_state');
@@ -512,7 +522,7 @@ function renderDays() {
 
         let videoHtml = '';
         if (ex.video) {
-          videoHtml = '<div class="video-btns"><a class="video-btn dy" href="' + ex.video + '" target="_blank">🎥 跳转抖音</a><a class="video-btn newtab" href="' + ex.video + '" target="_blank">🪟 新窗口打开</a></div>';
+          videoHtml = '<div class="video-btns"><a class="video-btn dy" href="javascript:void(0)" onclick="openVideo(\'' + ex.video + '\',\'dy\')">🎥 跳转抖音</a><a class="video-btn newtab" href="javascript:void(0)" onclick="openVideo(\'' + ex.video + '\',\'newtab\')">🪟 新窗口打开</a></div>';
         }
 
         exercisesHtml += '<div class="exercise-card" data-id="' + ex.id + '">';
